@@ -71,6 +71,19 @@ search:
   format: html
   limit: 10000
 
+sitemap:
+  path: sitemap.xml
+
+
+feed:
+  type: rss2
+  path: rss2.xml
+  limit: 20
+  hub:
+  content: true
+  content_limit: 140
+  content_limit_delim: ' '
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

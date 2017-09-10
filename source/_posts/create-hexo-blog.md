@@ -1,6 +1,9 @@
 ---
 title: 开篇如何通过hexo创建blog
 date: 2017-09-08 23:58:19
+author:
+  name: 悔惜晟
+  link: http://huixisheng.github.io
 tags:
 - hexo
 ---
@@ -23,6 +26,12 @@ $ hexo init
 $ git init // 添加仓库
 $ git remote add origin git@github.com:cosmeapp/cosmeapp.github.com.git
 $ git clone https://github.com/iissnan/hexo-theme-next themes/next // 安装主题，记得切换到hexo站点目录下
+```
+
+### 创建文章 ###
+
+```bash
+$ hexo new post create-hexo-blog
 ```
 
 ### 本地预览 ###
@@ -60,7 +69,7 @@ deploy:
 
 ```bash
 $ git clone https://github.com/iissnan/hexo-theme-next themes/next
-````
+```
 
 配置`_config.yml`
 
@@ -157,3 +166,13 @@ You may need an appropriate loader to handle this file type.
 ```
 
 相关的扩展阅读[如何评价「多说」即将关闭？有什么替代方案？](https://www.zhihu.com/question/57426274)
+
+
+### 其他插件 ###
+
+```
+    "hexo-all-minifier": "^0.2.6",
+    "hexo-generator-feed": "^1.2.2",
+    "hexo-generator-seo-friendly-sitemap": "0.0.21",
+    "hexo-wordcount": "^3.0.2",
+```
