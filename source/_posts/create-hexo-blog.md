@@ -32,6 +32,7 @@ $ git clone https://github.com/iissnan/hexo-theme-next themes/next // 安装主�
 
 ```bash
 $ hexo new post create-hexo-blog
+$ hexo new weekly  weekly-2017-05-06 // 创建周刊模板
 ```
 
 ### 本地预览 ###
@@ -168,6 +169,9 @@ You may need an appropriate loader to handle this file type.
 相关的扩展阅读[如何评价「多说」即将关闭？有什么替代方案？](https://www.zhihu.com/question/57426274)
 
 
+| replace(r/\d{4}-/g, '')
+
+
 ### 其他插件 ###
 
 ```
@@ -176,3 +180,75 @@ You may need an appropriate loader to handle this file type.
     "hexo-generator-seo-friendly-sitemap": "0.0.21",
     "hexo-wordcount": "^3.0.2",
 ```
+
+## 自定义scaffold  ##
+
+最初是想实现如下title的日期是自动生成的。但`{{ date }}`会含有时间，直觉`filter`可以处理。然而没并软，且有报错。
+
+```
+---
+title: 美妆心得技术周刊2017-05-06
+tags:
+  - weekly
+date: 2017-05-06 22:16:48
+---
+```
+
+于是开始啃代码，从`hexo-cli`开始
+
+根据`package.json` 的 `"main": "lib/hexo",` 和`bin/hexo`。使用的核心模块是`Hexo`，初步猜测当前项目的`node_moduels`存在`hexo`，就加载该目录下的模块，否则加载全局的。这个跟`webpack`一样。
+
+根据提示的报错
+
+```
+Template render error: (unknown path) [Line 1, Column 22]
+  expected symbol, got string
+    ...
+    at /Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/extend/tag.js:66:9
+   ...
+    at Tag.render (/Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/extend/tag.js:64:10)
+    at /Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/hexo/post.js:111:16
+```
+定位到`post.js`。
+
+```
+Post.prototype.create = function(data, replace, callback) {
+  // console.log(data);
+  // return;
+```
+
+执行了 `_renderScaffold`
+
+`tag.render(yfmSplit.data, frontMatter)`。
+
+```
+var placeholder = '\uFFFC';
+var rPlaceholder = /(?:<|&lt;)\!--\uFFFC(\d+)--(?:>|&gt;)/g;
+
+Tag.prototype.render = function(str, options, callback) {
+```
+
+```
+  return new Promise(function(resolve, reject) {
+    str = str.replace(/<pre><code.*>[\s\S]*?<\/code><\/pre>/gm, escapeContent);
+    env.renderString(str, options, function(err, result) {
+```
+
+最后发现是[`nunjucks`](http://mozilla.github.io/nunjucks/cn/templating.html)模块引擎解析的。那么这样问题就好办了。于是根据相关语法做配置即可。然后并没有提供`filter date`的方法，需要添加自定义`filter`。类试的库有[`nunjucks-date`](https://www.google.com.sg/search?biw=1242&bih=703&q=nunjucks+date&oq=nunjucks+date&gs_l=psy-ab.3...5873433.5873948.0.5874188.5.5.0.0.0.0.0.0..0.0....0...1.1.64.psy-ab..5.0.0.lMlZdOVppgE)。添加库需要涉及到`hexo`源码的修改，是否可以从原有的`filter`做文章。于是找到`replace`
+
+```
+---
+title: 美妆心得技术周刊{{ date | replace(r/\s.*/g, "")  }}
+```
+关于`Hexo`源码的阅读还需更深入。
+
+
+### 参考文章 ###
+- http://johnwonder.github.io/2016/09/29/hexo-scaffold/
+- http://mozilla.github.io/nunjucks/cn/templating.html
+- https://hexo.io/zh-cn/docs/writing.html
+
+## 更新日志 ##
+
+### 2017-09-11 ###
+- 添加自定义scaffold

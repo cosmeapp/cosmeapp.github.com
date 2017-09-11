@@ -5,9 +5,7 @@ tags:
 - weekly
 ---
 
-
 根据周报中技术部推荐的资源进行整理。
-
 
 ## 书 ##
 
@@ -151,4 +149,4 @@ SpaceVim 是一个社区驱动的模块化 vim/neovim 配置集合。
 http://www.jianshu.com/p/e0b63a98a7fc
 - 需求了解要做什么：https://mp.weixin.qq.com/s?__biz=MjM5ODY4ODIxOA==&mid=201952103&idx=1&sn=610a0021807808a34d46edfa1cda40b1&mpshare=1&scene=1&srcid=060200swWvNGr5BZ7TlABFZj&key=48d1218a6e2970b0aa1d0b74aaa3757e00f7f9d8c71bf52f9f8ac81708e80b0d841651b5598c3d3a20749179877849824cc0a3a47c7990c46a48ed18a83b2ffe1a7b68566aed7ee4492b63206e539bc2&ascene=0&uin=MTk3ODA1MDIwMQ%3D%3D&devicetype=iMac+MacBookPro11%2C1+OSX+OSX+10.11.5+build(15F34)&version=12020610&nettype=WIFI&fontScale=100&pass_ticket=iUIezIVUwLB39vKkS8pFwoWKy%2B8QRO9yOawuTuF5klqq4%2FYp0uD7IhxLsvvO0QV0
 
-
+**本周刊由团队成员推荐整理而成，内容来自互联网**
