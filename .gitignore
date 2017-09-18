@@ -58,3 +58,5 @@ typings/
 .env
 .deploy_git/
 public
+
+.DS_Store

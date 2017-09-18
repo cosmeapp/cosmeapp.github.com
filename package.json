@@ -6,7 +6,7 @@
     "version": "3.3.9"
   },
   "dependencies": {
-    "hexo": "^3.2.0",
+    "hexo": "^3.3.9",
     "hexo-admin": "^2.2.1",
     "hexo-all-minifier": "^0.2.6",
     "hexo-deployer-git": "^0.3.1",
