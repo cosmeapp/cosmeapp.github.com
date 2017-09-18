@@ -13,7 +13,7 @@ before_install:
 - openssl aes-256-cbc -K $encrypted_eab4b037e21f_key -iv $encrypted_eab4b037e21f_iv
   -in github-ci.enc -out ~/.ssh/id_rsa -d
 - chmod 0600 ~/.ssh/id_rsa
-- cp ssh_config ~/.ssh/config
+- cp .travis/ssh_config ~/.ssh/config
 - sudo cp ssh_config /etc/ssh/ssh_config
 - sudo chmod 755 /etc/ssh/ssh_config
 - eval "$(ssh-agent -s)"
