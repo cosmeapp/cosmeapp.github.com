@@ -1,20 +1,33 @@
 language: node_js
+
 node_js:
 - 6.0.0
+
 branches:
   only:
   - dev
+
 before_install:
+- openssl aes-256-cbc -K $encrypted_eab4b037e21f_key -iv $encrypted_eab4b037e21f_iv
+  -in github-ci.enc -out ~/.ssh/id_rsa -d
+- chmod 0600 ~/.ssh/id_rsa
+- eval "$(ssh-agent -s)"
+- ssh-add ~/.ssh/id_rsa
+- cp ssh_config ~/.ssh/config
 - npm install -g hexo-cli
+
 install:
 - npm install
+
 script:
 - hexo generate
+
 after_success:
 - git config --global user.name "huixisheng"
 - git config --global user.email "469184346@qq.com"
-- sed -i'' "/^ *repo/s~github\.com~${GH_TOKEN}@github.com~" _config.yml
 - hexo deploy
-env:
-  global:
-    secure: Q2zFP2BI+gNir53W5GUBiq9d+ETkvwxdP/hin9/+ud5R7ptrkuhpuPKEV3hMGxPi9cvAoOzWlRwTRJMhfTtEWwCd19oHjhtpghD0AAcGkgL0qc0K1ropTbHBxuGcMmZHKWyEqfdHBTd5D0NYMtOxQFDI6HQwUC3h0gGMsbWbMXdhTnJPw48ag1vEkhUsY1eBkzU3Xzy+45/dVFg8NgWl/t6TfempfBtaa5KTXZF+RoLGRQ9RrsZtbCG0AtHJpIt78AeKJtxZov5C2XcyE4nbLHfyDQ+05AWdg0dQm8wdpZOMxiJB88vemFnlqPRKT8tbcYuMDivfyHSlUI44wLmEDaAW922TAmFlgEuUKNpEPEpDUSiKrgHWvwz41LC2J7JOvjL0Gg9b0T8Ttx5Gy4RMsNOM7vj/EchrODfzQZ38ACSek9mciUzTeGYjmLmZRgRrG1aBlrfVLjP7jkTS7cUSd5lHRLG3sYIiRppTQjSFmSojQdFjw58rXmAW34oO11zK2egvip96Xx7UPHXZosI2fi5TPU95bWJre8zEI7jGxFoX50F1ev5MBan04kv3SGcBOJAIWW+kDOGJrzwH+kYjz0mB8gJeynwt0eAuQe2aJmjMJkHcMW6SoSotIRORPtmwHCcxv/0kGAajO9V3xpLn7T0uOhv3Qc6YPafV7tTNaCs=
+
+addons:
+  ssh_known_hosts
+  - github.com
+  - ssh.github.com
