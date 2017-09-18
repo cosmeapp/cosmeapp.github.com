@@ -14,7 +14,7 @@ before_install:
   -in github-ci.enc -out ~/.ssh/id_rsa -d
 - chmod 0600 ~/.ssh/id_rsa
 - cp .travis/ssh_config ~/.ssh/config
-- sudo cp ssh_config /etc/ssh/ssh_config
+- sudo cp .travis/ssh_config /etc/ssh/ssh_config
 - sudo chmod 755 /etc/ssh/ssh_config
 - eval "$(ssh-agent -s)"
 - ssh-add ~/.ssh/id_rsa
