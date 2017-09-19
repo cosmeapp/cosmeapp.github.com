@@ -1,6 +1,9 @@
 ---
 title: npm相关资源整理
 date: 2017-09-19 19:41:35
+author:
+  name: 悔惜晟
+  link: http://huixisheng.github.io
 tags:
 - nodejs
 - npm
