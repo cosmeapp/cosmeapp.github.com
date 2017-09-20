@@ -11,6 +11,8 @@ tags:
 
 > npm（全称Node Package Manager，即node包管理器）是Node.js默认的、以JavaScript编写的软件包管理系统。 - [来自wikipedia](https://zh.wikipedia.org/wiki/Npm)
 
+本文首发在[美妆心得技术博客](https://cosmeapp.github.io/2017/09/19/npm-source/)，同步到前端开发者说博客。
+
 ## npm镜像 ##
 
 ```
