@@ -22,5 +22,7 @@
     "hexo-server": "^0.2.0",
     "hexo-wordcount": "^3.0.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "hexo-renderer-marked": "^0.2.11"
+  }
 }

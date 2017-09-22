@@ -248,7 +248,6 @@ title: 美妆心得技术周刊{{ date | replace(r/\s.*/g, "")  }}
 - http://mozilla.github.io/nunjucks/cn/templating.html
 - https://hexo.io/zh-cn/docs/writing.html
 
-## 更新日志 ##
 
 ### 2017-09-11 ###
 - 添加自定义scaffold
