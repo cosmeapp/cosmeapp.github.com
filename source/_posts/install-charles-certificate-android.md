@@ -9,6 +9,7 @@ tags:
 ---
 # 在安卓手机上安装Charles证书
 
+
 日常开发中，总有遇到要查看网络请求的时候，浏览器中打开调试器就能看到，手机端就抓瞎了。Charles就正好能帮住我们解决这样的难题。
 
 然鹅，使用几次之后你就会发现，抓http请求的时候Charles是一抓一个准，而抓https的时候你却看到的都是红叉叉。因为使用Charles截取https通信需要安装Charles的证书，没有安装证书，自然看到的都是叉叉咯。
@@ -36,7 +37,7 @@ Charles是mac中常用的抓包工具，主要是用来抓网络封包然后进�
 
 我的情况是第一种方法没成功，下载到了文件但是无法安装（ 黑人问号？？？）
 
-![安装失败](./charles/4.jpeg)
+![安装失败](../images/charles/4.jpeg)
 
 说一下第一种方法的步骤：
 
@@ -44,11 +45,11 @@ Charles是mac中常用的抓包工具，主要是用来抓网络封包然后进�
 
 - 找到 “ SSL Proxying ”  ->   “ Install Charles Root Certificate on a Mobile Device or Remote Browser ”，按下去。
 
-  ![方法一步骤](./charles/1.png)
+  ![方法一步骤](../images/charles/1.png)
 
 - 然后跟着提示操作。手机代理到本机ip的 `8888` 端口，在手机浏览器上打开`chls.pro/ssl`，就会自动下载并安装证书（ 如果没有自动安装，可以自己去下载管理里面找出来手动安装它 ）。
 
-  ![charles提示](./charles/3.png)
+  ![charles提示](../images/charles/3.png)
 
   不知道本机ip可以使用 `ifconfig` 命令查找
 
@@ -58,11 +59,11 @@ Charles是mac中常用的抓包工具，主要是用来抓网络封包然后进�
 
 - 找到 " SSL Proxying "  ->  " Save Charles Root Certificate… "，按下去。
 
-  ![](./charles/2.png)
+  ![](../images/charles/2.png)
 
   会出现提示保存的界面，可以保存成两种格式，`.pem ` 和 `.cer` ，我存了 `.cer` 。
 
-  ![](./charles/6.png)
+  ![](../images/charles/6.png)
 
   就是这货，把这个文件传到手机上。
 
@@ -70,11 +71,11 @@ Charles是mac中常用的抓包工具，主要是用来抓网络封包然后进�
 
   别急，咱们换种办法，进入"设置" -> "更多设置" -> "系统安全" -> "从SD卡安装证书"，然后找到证书文件，打开（ 可能不同的手机路径略有不同，莫慌，仔细找找总会找到的。我的是小米 ）。
 
-  ![](./charles/8.jpeg)
+  ![](../images/charles/8.jpeg)
 
   这里有一点要注意，安装证书要输入锁屏密码，如果没有，就去设置一个。
 
-  ![](./charles/9.jpeg)
+  ![](../images/charles/9.jpeg)
 
   历经千辛万苦，终于安装成功了。
 
