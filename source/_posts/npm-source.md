@@ -16,17 +16,27 @@ tags:
 ## npm镜像 ##
 
 ```
-$ npm config set registry "http://registry.npm.taobao.org"
+$ npm config set registry "https://registry.npm.taobao.org"
 ```
 
 其他镜像，用于提高安装速度，比如用`vue-cli`初始化项目。在`~/.npmrc`中添加如下配置
 
 ```
-electron_mirror=https://npm.taobao.org/mirrors/electron/
-sass_binary_site=https://npm.taobao.org/mirrors/node-sass/
-phantomjs_cdnurl=http://npm.taobao.org/mirrors/phantomjs
-// https://gist.github.com/52cik/c1de8926e20971f415dd
-chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
+registry=https://registry.npm.taobao.org/
+// https://registry.npmjs.org=true
+// https://blog.niceue.com/front-end-development/using-domestic-npm-images.html=true
+// http://www.cnblogs.com/huang0925/archive/2013/05/17/3083207.html=true
+electron_mirror=https://npm.taobao.org/dist/electron/
+sass_binary_site=https://npm.taobao.org/dist/node-sass
+phantomjs_cdnurl=https://npm.taobao.org/dist/phantomjs
+// https://gist.github.com/52cik/c1de8926e20971f415dd=true
+chromedriver_cdnurl=https://npm.taobao.org/dist/chromedriver
+disturl=https://npm.taobao.org/dist
+operadriver_cdnurl=https://npm.taobao.org/mirrors/operadriver
+selenium_cdnurl=https://npm.taobao.org/mirrors/selenium
+node_inspector_cdnurl=https://npm.taobao.org/mirrors/node-inspector
+// 自定义的npm scope
+@x-scaffold:registry=https://registry.npmjs.org/
 ```
 
 关于关于更多的镜像资料，可以参考我之前写的文章[国内镜像源整理](https://huixisheng.github.io/%2Fmirror%2F)
@@ -50,7 +60,7 @@ chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver
 
 [most depended-upon packages](https://www.npmjs.com/browse/depended)
 
-## 包管理工具 ##
+## npm包资源搜索q ##
 
 [pnpm](https://pnpm.js.org/) Fast, disk space efficient package manager
 
@@ -65,7 +75,7 @@ $ yarn config set registry https://registry.npm.taobao.org --global
 $ yarn config set disturl https://npm.taobao.org/dist --global
 ```
 
-这个facebook应该不会加类试React的协议吧？
+这个facebook应该不会加类似React的协议吧？
 
 会生成一个`yarn.lock`锁定依赖。
 
