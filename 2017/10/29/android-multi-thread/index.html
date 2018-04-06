@@ -1,0 +1,314 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css"><meta name="keywords" content="Android,"><link rel="alternate" href="/rss2.xml" title="美妆心得技术博客" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2"><meta name="description" content="Android线程知识整理Handler每个线程都和一个Handler类实例绑定，而且可以和别的线程一起运行，相互通信。AsyncTask内部也是使用Handler进行处理的，只是不是运行在UI线程而已，它会提供一个channel来和UI线程通信，使用postExecute方法即可实现。AsyncTask使用AsyncTask是在Android上操作线程最简单的方式，也是最容易出错的方式。Inte"><meta name="keywords" content="Android"><meta property="og:type" content="article"><meta property="og:title" content="Android线程知识整理"><meta property="og:url" content="https://cosmeapp.github.io/2017/10/29/android-multi-thread/index.html"><meta property="og:site_name" content="美妆心得技术博客"><meta property="og:description" content="Android线程知识整理Handler每个线程都和一个Handler类实例绑定，而且可以和别的线程一起运行，相互通信。AsyncTask内部也是使用Handler进行处理的，只是不是运行在UI线程而已，它会提供一个channel来和UI线程通信，使用postExecute方法即可实现。AsyncTask使用AsyncTask是在Android上操作线程最简单的方式，也是最容易出错的方式。Inte"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2018-04-06T03:56:29.082Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Android线程知识整理"><meta name="twitter:description" content="Android线程知识整理Handler每个线程都和一个Handler类实例绑定，而且可以和别的线程一起运行，相互通信。AsyncTask内部也是使用Handler进行处理的，只是不是运行在UI线程而已，它会提供一个channel来和UI线程通信，使用postExecute方法即可实现。AsyncTask使用AsyncTask是在Android上操作线程最简单的方式，也是最容易出错的方式。Inte"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"5.1.2",sidebar:{position:"left",display:"post",offset:12,offset_float:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://cosmeapp.github.io/2017/10/29/android-multi-thread/"><title>Android线程知识整理 | 美妆心得技术博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f796c37823a686f5d3cf3ad6c280aa2d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">美妆心得技术博客</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://cosmeapp.github.io/2017/10/29/android-multi-thread/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="美妆心得技术部"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="美妆心得技术博客"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">Android线程知识整理</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-29T22:26:16+08:00">2017-10-29 </time></span><span class="post-count">字数: 3,031</span></div></header><div class="post-body" itemprop="articleBody"><h2 id="Android线程知识整理"><a href="#Android线程知识整理" class="headerlink" title="Android线程知识整理"></a>Android线程知识整理</h2><ul><li>Handler</li></ul><p>每个线程都和一个Handler类实例绑定，而且可以和别的线程一起运行，相互通信。<br>AsyncTask内部也是使用Handler进行处理的，只是不是运行在UI线程而已，它会提供一个channel来和UI线程通信，使用postExecute方法即可实现。</p><ul><li>AsyncTask</li></ul><p>使用AsyncTask是在Android上操作线程最简单的方式，也是最容易出错的方式。</p><ul><li>IntentService</li></ul><p>这种方式需要写更多的代码，但是这是把耗时任务移动到后台的很好的方式，也是我最喜欢的方式。配上使用一个EventBus机制的框架如Otto，这样的话实现IntentService就非常简单了。</p><ul><li>Loader</li></ul><p>关于处理异步任务，还有很多事情需要做，比如从数据库或者内容提供者那里处理一些数据。</p><ul><li>Service</li></ul><p>如果你曾经使用过Service的话，你应该知道这里会有一点误区，其中一个常见的误解就是服务是运行在后台线程的。其实不是！看似运行在后台是因为它们不与UI组件关联，但是它们（默认）是运行在UI线程上的……所以默认运行在UI线程上，甚至在上面没有UI部件。</p><h3 id="Android进程"><a href="#Android进程" class="headerlink" title="Android进程"></a>Android进程</h3><p>Android会根据进程中运行的组件类别以及组件的状态来判断该进程的重要性，Android会首先停止那些不重要的进程。按照重要性从高到低一共有五个级别：</p><p><strong>前台进程 &gt; 可见进程 &gt; 服务进程 &gt; 后台进程 &gt; 空进程</strong></p><p>空进程：未运行任何程序组件。运行这些进程的唯一原因是作为一个缓存，缩短下次程序需要重新使用的启动时间。系统经常中止这些进程，这样可以调节程序缓存和系统缓存的平衡。</p><p>Android 对进程的重要性评级的时候，选取它最高的级别。另外，当被另外的一个进程依赖的时候，某个进程的级别可能会增高。一个为其他进程服务的进程永远不会比被服务的进程重要级低。因为服务进程比后台activity进程重要级高，因此一个要进行耗时工作的activity最好启动一个service来做这个工作，而不是开启一个子进程――特别是这个操作需要的时间比activity存在的时间还要长的时候。例如，在后台播放音乐，向网上上传摄像头拍到的图片，使用service可以使进程最少获取到“服务进程”级别的重要级，而不用考虑activity目前是什么状态。broadcast receivers做费时的工作的时候，也应该启用一个服务而不是开一个线程。</p><h4 id="Android的单线程模型"><a href="#Android的单线程模型" class="headerlink" title="Android的单线程模型"></a>Android的单线程模型</h4><p>Android UI操作并不是线程安全的并且这些操作必须在UI线程中执行。</p><hr><h3 id="Message-Queue"><a href="#Message-Queue" class="headerlink" title="Message Queue"></a>Message Queue</h3><p><strong>Message Queue是一个消息队列，用来存放通过Handler发布的消息。</strong> 消息队列通常附属于某一个创建它的线程，可以通过Looper.myQueue()得到当前线程的消息队列。Android在第一次启动程序时会为UI thread创建一个关联的消息队列，用来管理程序的一些上层组件，activities，broadcase receivers等等。你可以在自己的子线程中创建Handler与UI thread通讯。</p><p>注：产生一个Message对象，可以new，也可以使用<code>Message.obtain()</code>方法；两者都可以，但是更建议使用obtain方法，因为Message内部维护了一个Message池用于Message的复用，避免使用new 重新分配内存。</p><p><code>Message.obtain()</code>源码：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return a new Message instance from the global pool. Allows us to</span></span><br><span class="line"><span class="comment"> * avoid allocating new objects in many cases.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Message <span class="title">obtain</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">synchronized</span> (sPoolSync) &#123;</span><br><span class="line">        <span class="keyword">if</span> (sPool != <span class="keyword">null</span>) &#123;</span><br><span class="line">            Message m = sPool;</span><br><span class="line">            sPool = m.next;</span><br><span class="line">            m.next = <span class="keyword">null</span>;</span><br><span class="line">            m.flags = <span class="number">0</span>; <span class="comment">// clear in-use flag</span></span><br><span class="line">            sPoolSize--;</span><br><span class="line">            <span class="keyword">return</span> m;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Message();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><h3 id="Hanlder"><a href="#Hanlder" class="headerlink" title="Hanlder"></a>Hanlder</h3><p>Handler处理者，是Message的主要处理者，负责Message的发送，Message内容的执行处理。后台线程就是通过传进来的Handler对象引用来<code>sendMessage(Message)</code>。而使用Handler，需要implement 该类的<code>handleMessage(Message)</code>方法，它是处理这些Message的操作内容，例如Update UI。通常需要子类化Handler来实现handleMessage方法。</p><p><strong>Handler实例化时，会首先得到当前线程中保存的Looper实例，进而与Looper实例中的MessageQueue想关联。也就是与当前线程绑定。</strong></p><p>主要的方法有：<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">sendMessage</span><span class="params">(Message msg)</span></span></span><br></pre></td></tr></table></figure><p></p><p>把消息放入该Handler所 关联的消息队列，放置在所有当前时间前未被处理的消息后。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span></span></span><br></pre></td></tr></table></figure><p>关联该消息队列的线 程将通过调用Handler的handleMessage方 法来接收和处理消息，通常需要子类化Handler来 实现handleMessage。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">    <span class="comment">// all standard stuff</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...</span></span><br><span class="line">        <span class="comment">// all standard stuff</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// we're creating a new handler here</span></span><br><span class="line">        <span class="comment">// and we're in the UI Thread (default)</span></span><br><span class="line">        <span class="comment">// so this Handler is associated with the UI thread</span></span><br><span class="line">        Handler mHandler = <span class="keyword">new</span> Handler();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// I want to start doing something really long</span></span><br><span class="line">        <span class="comment">// which means I should run the fella in another thread.</span></span><br><span class="line">        <span class="comment">// I do that by sending a message - in the form of another runnable object</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// But first, I'm going to create a Runnable object or a message for this</span></span><br><span class="line">        Runnable mRunnableOnSeparateThread = <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span> <span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">// do some long operation</span></span><br><span class="line">                longOperation();</span><br><span class="line"></span><br><span class="line">                <span class="comment">// After mRunnableOnSeparateThread is done with it's job,</span></span><br><span class="line">                <span class="comment">// I need to tell the user that i'm done</span></span><br><span class="line">                <span class="comment">// which means I need to send a message back to the UI thread</span></span><br><span class="line"></span><br><span class="line">                <span class="comment">// who do we know that's associated with the UI thread?</span></span><br><span class="line">                mHandler.post(<span class="keyword">new</span> Runnable()&#123;</span><br><span class="line">                    <span class="meta">@Override</span></span><br><span class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</span><br><span class="line">                        <span class="comment">// do some UI related thing</span></span><br><span class="line">                        <span class="comment">// like update a progress bar or TextView</span></span><br><span class="line">                        <span class="comment">// ....</span></span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Cool but I've not executed the mRunnableOnSeparateThread yet</span></span><br><span class="line">        <span class="comment">// I've only defined the message to be sent</span></span><br><span class="line">        <span class="comment">// When I execute it though, I want it to be in a different thread</span></span><br><span class="line">        <span class="comment">// that was the whole point.</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> Thread(mRunnableOnSeparateThread).start();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure><h3 id="Looper"><a href="#Looper" class="headerlink" title="Looper"></a>Looper</h3><p>Looper是每条线程里的Message Queue的管家。Android没有Global的Message Queue，而Android会自动替主线程(UI线程)建立Message Queue，但在子线程里并没有建立Message Queue。所以调用<code>Looper.getMainLooper()</code>得到的主线程的Looper不为NULL，但调用<code>Looper.myLooper()</code>得到当前线程的Looper就有可能为NULL。</p><p>1) 可以通过Looper类的静态方法<code>Looper.myLooper</code>得到当前线程的Looper实例，如果当前线程未关联一个Looper实例，该方法将返回空。</p><p>2) 可以通过静态方法<code>Looper.getMainLooper()</code>方法得到主线程的Looper实例</p><ul><li>首先<code>Looper.prepare()</code>在本线程中保存一个Looper实例，然后该实例中保存一个MessageQueue对象；因为Looper.prepare()在一个线程中只能调用一次，所以MessageQueue在一个线程中只会存在一个。</li><li><code>Looper.loop()</code>会让当前线程进入一个无限循环，不端从MessageQueue的实例中读取消息，然后回调<code>msg.target.dispatchMessage(msg)</code>方法。</li><li>Handler的构造方法，会首先得到当前线程中保存的Looper实例，进而与Looper实例中的MessageQueue想关联。</li><li>Handler的sendMessage方法，会给msg的target赋值为handler自身，然后加入MessageQueue中。</li><li>在构造Handler实例时，我们会重写handleMessage方法，也就是<code>msg.target.dispatchMessage(msg)</code>最终调用的方法。</li></ul><hr><h2 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h2><h3 id="Hanlder-Thread"><a href="#Hanlder-Thread" class="headerlink" title="Hanlder + Thread"></a>Hanlder + Thread</h3><p>Handler可以把一个Message对象或者Runnable对象压入到消息队列中，进而在UI线程中获取Message或者执行Runnable对象，Handler把压入消息队列有两类方式，Post和sendMessage：</p><p>post:<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">super</span>.run();</span><br><span class="line">          <span class="comment">//... 子线程</span></span><br><span class="line">          mHandler.post(<span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">              <span class="meta">@Override</span></span><br><span class="line">              <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">                  <span class="comment">//... UI线程</span></span><br><span class="line">              &#125;</span><br><span class="line">          &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>sendMessage:<br></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">          <span class="keyword">super</span>.run();</span><br><span class="line">          <span class="comment">//... 子线程</span></span><br><span class="line">          mHandler.sendMessage(Message.obtain());</span><br><span class="line">      &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">mHandler = <span class="keyword">new</span> Handler()&#123;</span><br><span class="line">      <span class="meta">@Override</span></span><br><span class="line">      <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleMessage</span><span class="params">(Message msg)</span> </span>&#123;</span><br><span class="line">          <span class="keyword">super</span>.handleMessage(msg);</span><br><span class="line">          <span class="comment">//...</span></span><br><span class="line">      &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p></p><h3 id="AsyncTask"><a href="#AsyncTask" class="headerlink" title="AsyncTask"></a>AsyncTask</h3><p>AsyncTask是android提供的轻量级的异步类,可以直接继承AsyncTask，在类中实现异步操作，并提供接口反馈当前异步执行的程度(可以通过接口实现UI进度更新)，最后反馈执行的结果给UI主线程。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> AsyncTask&lt;Integer, Integer, String&gt;() &#123;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPreExecute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">               <span class="keyword">super</span>.onPreExecute();</span><br><span class="line">               <span class="comment">//第一个执行方法</span></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">protected</span> String <span class="title">doInBackground</span><span class="params">(Integer... params)</span> </span>&#123;</span><br><span class="line">               <span class="comment">//第二个执行方法,onPreExecute()执行完后执行</span></span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onProgressUpdate</span><span class="params">(Integer... values)</span> </span>&#123;</span><br><span class="line">               <span class="keyword">super</span>.onProgressUpdate(values);</span><br><span class="line">               <span class="comment">//这个函数在doInBackground调用,获取进度</span></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="meta">@Override</span></span><br><span class="line">           <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onPostExecute</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">               <span class="keyword">super</span>.onPostExecute(s);</span><br><span class="line">               <span class="comment">//doInBackground返回时触发，换句话说，就是doInBackground执行完后触发</span></span><br><span class="line">               <span class="comment">//这里的result就是上面doInBackground执行后的返回值，所以这里是"执行完毕"</span></span><br><span class="line">           &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><h3 id="ThreadPoolExecutor"><a href="#ThreadPoolExecutor" class="headerlink" title="ThreadPoolExecutor"></a>ThreadPoolExecutor</h3><p>ThreadPoolExecutor提供了一组线程池，可以管理多个线程并行执行。这样一方面减少了每个并行任务独自建立线程的开销，另一方面可以管理多个并发线程的公共资源，从而提高了多线程的效率。所以ThreadPoolExecutor比较适合一组任务的执行。Executors利用工厂模式对ThreadPoolExecutor进行了封装，使用起来更加方便。</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Executors.newFixedThreadPool()</span><br><span class="line"><span class="comment">//创建一个定长的线程池，每提交一个任务就创建一个线程，直到达到池的最大长度，这时线程池会保持长度不再变化</span></span><br><span class="line">Executors.newCachedThreadPool()</span><br><span class="line"><span class="comment">//创建一个可缓存的线程池，如果当前线程池的长度超过了处理的需要时，它可以灵活的回收空闲的线程，当需要增加时，</span></span><br><span class="line"><span class="comment">//它可以灵活的添加新的线程，而不会对池的长度作任何限制</span></span><br><span class="line">Executors.newScheduledThreadPool()</span><br><span class="line"><span class="comment">//创建一个定长的线程池，而且支持定时的以及周期性的任务执行，类似于Timer</span></span><br><span class="line">Executors.newSingleThreadExecutor()</span><br><span class="line"><span class="comment">//创建一个单线程化的executor，它只创建唯一的worker线程来执行任务</span></span><br></pre></td></tr></table></figure><h3 id="IntentService"><a href="#IntentService" class="headerlink" title="IntentService"></a>IntentService</h3><p>IntentService继承自Service，是一个经过包装的轻量级的Service，用来接收并处理通过Intent传递的异步请求。客户端通过调用startService(Intent)启动一个IntentService，利用一个work线程依次处理顺序过来的请求，处理完成后自动结束Service。</p><p>IntentService 继承自普通 Service 同时又在内部创建了一个 HandlerThread，在 onHandlerIntent()的回调里面处理扔到 IntentService 的任务。所以 IntentService 就不仅仅具备了异步线程的特性，还同时保留了 Service 不受主页面生命周期影响的特点。</p><p>使用 IntentService 需要特别留意以下几点：</p><ul><li><p>首先，因为 IntentService 内置的是 HandlerThread 作为异步线程，所以每一个交给 IntentService 的任务都将以队列的方式逐个被执行到，一旦队列中有某个任务执行时间过长，那么就会导致后续的任务都会被延迟处理。</p></li><li><p>其次，通常使用到 IntentService 的时候，我们会结合使用 BroadcastReceiver 把工作线程的任务执行结果返回给主 UI 线程。使用广播容易引起性能问题，我们可以使用 LocalBroadcastManager 来发送只在程序内部传递的广播，从而提升广播的性能。我们也可以使用 runOnUiThread() 快速回调到主 UI 线程。</p></li><li><p>最后，包含正在运行的 IntentService 的程序相比起纯粹的后台程序更不容易被系统杀死，该程序的优先级是介于前台程序与纯后台程序之间的。</p></li></ul><hr><h3 id="View-post"><a href="#View-post" class="headerlink" title="View.post()"></a>View.post()</h3><p><code>View.post(Runnable)</code>方法。在post(Runnable action)方法里，View获得当前线程（即UI线程）的Handler，然后将action对象post到Handler里。在Handler里，它将传递过来的action对象包装成一个Message（Message的callback为action），然后将其投入UI线程的消息循环中。在Handler再次处理该Message时，有一条分支（未解释的那条）就是为它所设，直接调用runnable的run方法。而此时，已经路由到UI线程里，因此，我们可以毫无顾虑的来更新UI。</p><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://www.cppblog.com/fwxjj/archive/2010/05/31/116787.html" target="_blank" rel="noopener">浅析Android线程模型</a></p><p><a href="http://android.blog.51cto.com/268543/343823" target="_blank" rel="noopener">有关Android线程的学习</a></p><p><a href="http://www.jianshu.com/p/2b634a7c49ec" target="_blank" rel="noopener">Android 多线程的四种方式</a></p><p><a href="http://www.cnblogs.com/bugly/p/5519510.html" target="_blank" rel="noopener">Android性能优化典范之多线程篇</a></p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong> 张经纬</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://cosmeapp.github.io/2017/10/29/android-multi-thread/" title="Android线程知识整理">https://cosmeapp.github.io/2017/10/29/android-multi-thread/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Android/" rel="tag"># Android</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/10/29/google-flexbox-layout/" rel="next" title="FlexboxLayout的封装过程"><i class="fa fa-chevron-left"></i> FlexboxLayout的封装过程</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2017/10/29/iOS-AVFoundation/" rel="prev" title="iOS开发-利用AVFoundation开发仿微信的拍摄功能">iOS开发-利用AVFoundation开发仿微信的拍摄功能 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">美妆心得技术部</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">34</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">19</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android线程知识整理"><span class="nav-number">1.</span> <span class="nav-text">Android线程知识整理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Android进程"><span class="nav-number">1.1.</span> <span class="nav-text">Android进程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android的单线程模型"><span class="nav-number">1.1.1.</span> <span class="nav-text">Android的单线程模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Message-Queue"><span class="nav-number">1.2.</span> <span class="nav-text">Message Queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hanlder"><span class="nav-number">1.3.</span> <span class="nav-text">Hanlder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Looper"><span class="nav-number">1.4.</span> <span class="nav-text">Looper</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程"><span class="nav-number">2.</span> <span class="nav-text">多线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hanlder-Thread"><span class="nav-number">2.1.</span> <span class="nav-text">Hanlder + Thread</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AsyncTask"><span class="nav-number">2.2.</span> <span class="nav-text">AsyncTask</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ThreadPoolExecutor"><span class="nav-number">2.3.</span> <span class="nav-text">ThreadPoolExecutor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IntentService"><span class="nav-number">2.4.</span> <span class="nav-text">IntentService</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#View-post"><span class="nav-number">2.5.</span> <span class="nav-text">View.post()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">美妆心得技术部</span></div><div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><link rel="stylesheet" href="/gitalk/gitalk.css"><script src="/gitalk/gitalk.min.js"></script><script>var gitalk=new Gitalk({clientID:"cb9d990636e84547cadb",clientSecret:"78036da2ca2985c3df477c76c407a120ae664368",repo:"cosmeapp.github.com",owner:"cosmeapp",id:"",title:"Android线程知识整理",body:"https://cosmeapp.github.io/2017/10/29/android-multi-thread/\n\nAndroid线程知识整理",labels:["Gitalk","Android"],admin:["huixisheng"],distractionFreeMode:!0});gitalk.render("gitalk-container")</script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script></body></html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css"><meta name="keywords" content="hexo,"><link rel="alternate" href="/rss2.xml" title="美妆心得技术博客" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2"><meta name="description" content="此为团队博客开篇，让技术部的知识沉淀下来，这是一个好的开始。算是技术部的一个坑，让大家都参与进来。本文介绍通过hexo如何搭建技术博客。为何选择hexo，支持markdown，最主要是先有个平台有内容产出，有内容了什么都好说，选择其他框架、自定义主题或者自行开发一个适合自己的博客系统。安装1$ npm install -g hexo-cli注意：安装之前先安装nodejs ，下载地址 https:"><meta name="keywords" content="hexo"><meta property="og:type" content="article"><meta property="og:title" content="开篇如何通过hexo创建blog"><meta property="og:url" content="https://cosmeapp.github.io/2017/09/08/create-hexo-blog/index.html"><meta property="og:site_name" content="美妆心得技术博客"><meta property="og:description" content="此为团队博客开篇，让技术部的知识沉淀下来，这是一个好的开始。算是技术部的一个坑，让大家都参与进来。本文介绍通过hexo如何搭建技术博客。为何选择hexo，支持markdown，最主要是先有个平台有内容产出，有内容了什么都好说，选择其他框架、自定义主题或者自行开发一个适合自己的博客系统。安装1$ npm install -g hexo-cli注意：安装之前先安装nodejs ，下载地址 https:"><meta property="og:locale" content="zh-Hans"><meta property="og:updated_time" content="2018-04-06T03:56:29.082Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="开篇如何通过hexo创建blog"><meta name="twitter:description" content="此为团队博客开篇，让技术部的知识沉淀下来，这是一个好的开始。算是技术部的一个坑，让大家都参与进来。本文介绍通过hexo如何搭建技术博客。为何选择hexo，支持markdown，最主要是先有个平台有内容产出，有内容了什么都好说，选择其他框架、自定义主题或者自行开发一个适合自己的博客系统。安装1$ npm install -g hexo-cli注意：安装之前先安装nodejs ，下载地址 https:"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"5.1.2",sidebar:{position:"left",display:"post",offset:12,offset_float:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://cosmeapp.github.io/2017/09/08/create-hexo-blog/"><title>开篇如何通过hexo创建blog | 美妆心得技术博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f796c37823a686f5d3cf3ad6c280aa2d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">美妆心得技术博客</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://cosmeapp.github.io/2017/09/08/create-hexo-blog/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="美妆心得技术部"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="美妆心得技术博客"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">开篇如何通过hexo创建blog</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T15:58:19+00:00">2017-09-08 </time></span><span class="post-count">字数: 1,459</span></div></header><div class="post-body" itemprop="articleBody"><p>此为团队博客开篇，让技术部的知识沉淀下来，这是一个好的开始。算是技术部的一个坑，让大家都参与进来。本文介绍通过hexo如何搭建技术博客。</p><p>为何选择hexo，支持<code>markdown</code>，最主要是先有个平台有内容产出，有内容了什么都好说，选择其他框架、自定义主题或者自行开发一个适合自己的博客系统。</p><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br></pre></td></tr></table></figure><p><strong>注意：</strong>安装之前先安装nodejs ，下载地址 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></p><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">$ git init // 添加仓库</span><br><span class="line">$ git remote add origin git@github.com:cosmeapp/cosmeapp.github.com.git</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next // 安装主题，记得切换到hexo站点目录下</span><br></pre></td></tr></table></figure><h3 id="创建文章"><a href="#创建文章" class="headerlink" title="创建文章"></a>创建文章</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new post create-hexo-blog</span><br><span class="line">$ hexo new weekly  weekly-2017-05-06 // 创建周刊模板</span><br></pre></td></tr></table></figure><h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server -g</span><br></pre></td></tr></table></figure><h3 id="构建发布"><a href="#构建发布" class="headerlink" title="构建发布"></a>构建发布</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy -g</span><br></pre></td></tr></table></figure><h2 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h2><h3 id="hexo-deployer-git"><a href="#hexo-deployer-git" class="headerlink" title="hexo-deployer-git"></a>hexo-deployer-git</h3><blockquote><p>Git deployer plugin for Hexo.</p></blockquote><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save-dev</span><br></pre></td></tr></table></figure><p>配置<code>_config.yml</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: git@github.com:cosmeapp/cosmeapp.github.com.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure><h3 id="配置主题"><a href="#配置主题" class="headerlink" title="配置主题"></a>配置主题</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure><p>配置<code>_config.yml</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">theme: next</span><br></pre></td></tr></table></figure><p>其他具体的配置参考<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">http://theme-next.iissnan.com/</a></p><h3 id="Gitalk"><a href="#Gitalk" class="headerlink" title="Gitalk"></a><a href="https://github.com/gitalk/gitalk" target="_blank" rel="noopener">Gitalk</a></h3><blockquote><p>Gitalk 是一个基于 Github Issue 和 Preact 开发的评论插件</p></blockquote><p>因公司业务调整多说项目于2017年6月1日正式关停服务。于是考虑使用<code>Gitalk</code>代替。</p><p><code>NexT</code>主题集成<code>Gittalk</code>，这个可以发个pr</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">+++ b/layout/_partials/comments.swig</span><br><span class="line">@@ -32,4 +32,5 @@</span><br><span class="line">       &lt;div id=&quot;vcomments&quot;&gt;&lt;/div&gt;</span><br><span class="line">     &#123;% endif %&#125;</span><br><span class="line">   &lt;/div&gt;</span><br><span class="line">+  &lt;div id=&quot;gitalk-container&quot;&gt;&lt;/div&gt;</span><br><span class="line"> &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">+++ b/layout/_third-party/comments/index.swig</span><br><span class="line"> &#123;% include &apos;valine.swig&apos; %&#125;</span><br><span class="line">+&#123;% include &apos;gittalk.swig&apos; %&#125;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123;% if page.comments %&#125;</span><br><span class="line">&lt;link rel=&quot;stylesheet&quot; href=&quot;/gitalk/gitalk.css&quot;&gt;</span><br><span class="line">&lt;script src=&quot;/gitalk/gitalk.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">var gitalk = new Gitalk(&#123;</span><br><span class="line">  clientID: &apos;cb9d990636e84547cadb&apos;,</span><br><span class="line">  clientSecret: &apos;78036da2ca2985c3df477c76c407a120ae664368&apos;,</span><br><span class="line">  repo: &apos;cosmeapp.github.com&apos;,</span><br><span class="line">  owner: &apos;cosmeapp&apos;,</span><br><span class="line">  id: &apos;&apos;,</span><br><span class="line">  title: &apos;&#123;&#123; page.title &#125;&#125;&apos;,</span><br><span class="line">  body: &apos;&#123;&#123; page.permalink &#125;&#125;\n\n&#123;&#123; page.title &#125;&#125;&apos;,</span><br><span class="line">  labels: [&apos;Gitalk&apos;&#123;% if page.tags and page.tags.length %&#125;&#123;% for tag in page.tags %&#125;,&apos;&#123;&#123; tag.name &#125;&#125;&apos;&#123;% endfor %&#125;&#123;% endif %&#125;],</span><br><span class="line">  admin: [&apos;huixisheng&apos;],</span><br><span class="line">  distractionFreeMode: true</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">gitalk.render(&apos;gitalk-container&apos;);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&#123;% endif %&#125;</span><br></pre></td></tr></table></figure><p>不想设置<code>id</code>成为<code>labels</code>。于是下载<code>Gitalk</code>源码修改，但构建的时候报错</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ERROR in ./src/index.js</span><br><span class="line">Module parse failed: ~/gitalk/src/index.js Unexpected token (23:18)</span><br><span class="line">You may need an appropriate loader to handle this file type.</span><br><span class="line">|     &#125;</span><br><span class="line">|</span><br><span class="line">|     return render(&lt;GitalkComponent options=&#123;this.options&#125;/&gt;, node)</span><br><span class="line">|   &#125;</span><br><span class="line">| &#125;</span><br><span class="line"> @ multi (webpack)-dev-server/client?http://localhost:8000 webpack/hot/dev-server ./index.js</span><br></pre></td></tr></table></figure><p>很奇怪，看了相关<code>webpack</code>配置并没有什么问题，提了<a href="https://github.com/gitalk/gitalk/issues/23" target="_blank" rel="noopener">issue</a>。当然提issue前努力尝试去解决问题，开源的项目不可能连构建都不行。</p><ul><li>尝试升级相关的dependencies，推荐<code>npm-check</code></li><li>删除<code>node_moduels</code>,尝试 <code>npm install</code>和 <code>yarn install</code></li><li>问题初步怀疑是<code>jsx</code>不解析，但是<code>babel-loader</code>配置没问题</li><li>google <code>You may need an appropriate loader to handle this file type.</code> 尝试添加了<code>webpack</code>、<code>babel-loader</code>、<code>jsx</code>等关键词。折腾到凌晨2点多，无果，媳妇喊睡觉</li><li>第二天起来，开始尝试写最简单的<a href="https://github.com/huixisheng/lab/tree/gh-pages/React" target="_blank" rel="noopener">demo</a>，demo跑起来没有问题，对比demo的配置，配置无差。后面发现<code>Gitalk</code>的项目是<code>clone</code>在<code>node_modules</code>目录下，换了目录。项目终于可以跑起来了 @todo 深入为何在<code>node_modules</code>目录下不行？初步设想，应该是<code>nodejs</code>查找依赖，通过配置<code>webpack</code>可以解决</li></ul><p>问题的出现不是偶然，任何问题的出现都是有原因，有可能是一个字母，不同的环境。当出现不可思议的问题时候，需要静下心，慢慢体会碰到问题的苦恼，最终享受问题解决的快乐。</p><p>移除<code>id</code>添加为<code>labels</code><br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">+++ b/src/gitalk.jsx</span><br><span class="line">@@ -184,7 +184,8 @@ class GitalkComponent extends Component &#123;</span><br><span class="line">       params: &#123;</span><br><span class="line">         client_id: clientID,</span><br><span class="line">         client_secret: clientSecret,</span><br><span class="line">-        labels: labels.concat(id).join(&apos;,&apos;)</span><br><span class="line">+        labels: labels.join(&apos;,&apos;)</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;).then(res =&gt; &#123;</span><br><span class="line">     return axiosGithub.post(`/repos/$&#123;owner&#125;/$&#123;repo&#125;/issues`, &#123;</span><br><span class="line">       title,</span><br><span class="line">-      labels: labels.concat(id),</span><br><span class="line">+      labels: labels,</span><br></pre></td></tr></table></figure><p></p><p>相关的扩展阅读<a href="https://www.zhihu.com/question/57426274" target="_blank" rel="noopener">如何评价「多说」即将关闭？有什么替代方案？</a></p><p>| replace(r/\d{4}-/g, ‘’)</p><h3 id="其他插件"><a href="#其他插件" class="headerlink" title="其他插件"></a>其他插件</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;hexo-all-minifier&quot;: &quot;^0.2.6&quot;,</span><br><span class="line">&quot;hexo-generator-feed&quot;: &quot;^1.2.2&quot;,</span><br><span class="line">&quot;hexo-generator-seo-friendly-sitemap&quot;: &quot;0.0.21&quot;,</span><br><span class="line">&quot;hexo-wordcount&quot;: &quot;^3.0.2&quot;,</span><br></pre></td></tr></table></figure><h2 id="自定义scaffold"><a href="#自定义scaffold" class="headerlink" title="自定义scaffold"></a>自定义scaffold</h2><p>最初是想实现如下title的日期是自动生成的。但<code>1504886299000</code>会含有时间，直觉<code>filter</code>可以处理。然而没并软，且有报错。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 美妆心得技术周刊2017-05-06</span><br><span class="line">tags:</span><br><span class="line">  - weekly</span><br><span class="line">date: 2017-05-06 22:16:48</span><br><span class="line">---</span><br></pre></td></tr></table></figure><p>于是开始啃代码，从<code>hexo-cli</code>开始</p><p>根据<code>package.json</code> 的 <code>&quot;main&quot;: &quot;lib/hexo&quot;,</code> 和<code>bin/hexo</code>。使用的核心模块是<code>Hexo</code>，初步猜测当前项目的<code>node_moduels</code>存在<code>hexo</code>，就加载该目录下的模块，否则加载全局的。这个跟<code>webpack</code>一样。</p><p>根据提示的报错</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Template render error: (unknown path) [Line 1, Column 22]</span><br><span class="line">  expected symbol, got string</span><br><span class="line">    ...</span><br><span class="line">    at /Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/extend/tag.js:66:9</span><br><span class="line">   ...</span><br><span class="line">    at Tag.render (/Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/extend/tag.js:64:10)</span><br><span class="line">    at /Users/huixisheng/cosmeapp.github.com/node_modules/hexo/lib/hexo/post.js:111:16</span><br></pre></td></tr></table></figure><p>定位到<code>post.js</code>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Post.prototype.create = function(data, replace, callback) &#123;</span><br><span class="line">  // console.log(data);</span><br><span class="line">  // return;</span><br></pre></td></tr></table></figure><p>执行了 <code>_renderScaffold</code></p><p><code>tag.render(yfmSplit.data, frontMatter)</code>。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var placeholder = &apos;\uFFFC&apos;;</span><br><span class="line">var rPlaceholder = /(?:&lt;|&amp;lt;)\!--\uFFFC(\d+)--(?:&gt;|&amp;gt;)/g;</span><br><span class="line"></span><br><span class="line">Tag.prototype.render = function(str, options, callback) &#123;</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">return new Promise(function(resolve, reject) &#123;</span><br><span class="line">  str = str.replace(/&lt;pre&gt;&lt;code.*&gt;[\s\S]*?&lt;\/code&gt;&lt;\/pre&gt;/gm, escapeContent);</span><br><span class="line">  env.renderString(str, options, function(err, result) &#123;</span><br></pre></td></tr></table></figure><p>最后发现是<a href="http://mozilla.github.io/nunjucks/cn/templating.html" target="_blank" rel="noopener"><code>nunjucks</code></a>模块引擎解析的。那么这样问题就好办了。于是根据相关语法做配置即可。然后并没有提供<code>filter date</code>的方法，需要添加自定义<code>filter</code>。类试的库有<a href="https://www.google.com.sg/search?biw=1242&amp;bih=703&amp;q=nunjucks+date&amp;oq=nunjucks+date&amp;gs_l=psy-ab.3...5873433.5873948.0.5874188.5.5.0.0.0.0.0.0..0.0....0...1.1.64.psy-ab..5.0.0.lMlZdOVppgE" target="_blank" rel="noopener"><code>nunjucks-date</code></a>。添加库需要涉及到<code>hexo</code>源码的修改，是否可以从原有的<code>filter</code>做文章。于是找到<code>replace</code></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 美妆心得技术周刊&#123;&#123; date | replace(r/\s.*/g, &quot;&quot;)  &#125;&#125;</span><br></pre></td></tr></table></figure><p>关于<code>Hexo</code>源码的阅读还需更深入。</p><h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ul><li><a href="http://johnwonder.github.io/2016/09/29/hexo-scaffold/" target="_blank" rel="noopener">http://johnwonder.github.io/2016/09/29/hexo-scaffold/</a></li><li><a href="http://mozilla.github.io/nunjucks/cn/templating.html" target="_blank" rel="noopener">http://mozilla.github.io/nunjucks/cn/templating.html</a></li><li><a href="https://hexo.io/zh-cn/docs/writing.html" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/writing.html</a></li></ul><h3 id="2017-09-11"><a href="#2017-09-11" class="headerlink" title="2017-09-11"></a>2017-09-11</h3><ul><li>添加自定义scaffold</li></ul></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong> 悔惜晟</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://cosmeapp.github.io/2017/09/08/create-hexo-blog/" title="开篇如何通过hexo创建blog">https://cosmeapp.github.io/2017/09/08/create-hexo-blog/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/hexo/" rel="tag"># hexo</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/08/19/weekly-2017-08-20/" rel="next" title="美妆心得技术周刊2017-08-20"><i class="fa fa-chevron-left"></i> 美妆心得技术周刊2017-08-20</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2017/09/17/weekly-2017-09-17/" rel="prev" title="美妆心得技术周刊2017-09-17">美妆心得技术周刊2017-09-17 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">美妆心得技术部</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">34</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">19</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化"><span class="nav-number">2.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建文章"><span class="nav-number">2.1.</span> <span class="nav-text">创建文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地预览"><span class="nav-number">2.2.</span> <span class="nav-text">本地预览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#构建发布"><span class="nav-number">2.3.</span> <span class="nav-text">构建发布</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插件"><span class="nav-number">3.</span> <span class="nav-text">插件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#hexo-deployer-git"><span class="nav-number">3.1.</span> <span class="nav-text">hexo-deployer-git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置主题"><span class="nav-number">3.2.</span> <span class="nav-text">配置主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gitalk"><span class="nav-number">3.3.</span> <span class="nav-text">Gitalk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他插件"><span class="nav-number">3.4.</span> <span class="nav-text">其他插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自定义scaffold"><span class="nav-number">4.</span> <span class="nav-text">自定义scaffold</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#参考文章"><span class="nav-number">4.1.</span> <span class="nav-text">参考文章</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2017-09-11"><span class="nav-number">4.2.</span> <span class="nav-text">2017-09-11</span></a></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">美妆心得技术部</span></div><div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><link rel="stylesheet" href="/gitalk/gitalk.css"><script src="/gitalk/gitalk.min.js"></script><script>var gitalk=new Gitalk({clientID:"cb9d990636e84547cadb",clientSecret:"78036da2ca2985c3df477c76c407a120ae664368",repo:"cosmeapp.github.com",owner:"cosmeapp",id:"",title:"开篇如何通过hexo创建blog",body:"https://cosmeapp.github.io/2017/09/08/create-hexo-blog/\n\n开篇如何通过hexo创建blog",labels:["Gitalk","hexo"],admin:["huixisheng"],distractionFreeMode:!0});gitalk.render("gitalk-container")</script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script></body></html>

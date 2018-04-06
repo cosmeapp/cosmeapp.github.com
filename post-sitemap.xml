@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://cosmeapp.github.io</loc>
+        <changefreq>daily</changefreq>
+        <priority>1</priority>
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/29/android-multi-thread/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/08/create-hexo-blog/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/20/es6-destructuring-and-spread-operator/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/20/git-basic/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/20/git-flow/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/29/google-flexbox-layout/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/29/iOS-AVFoundation/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/26/install-charles-certificate-android/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/29/mobile-dialog/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/19/npm-source/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/26/php-mess-detector/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/26/software-test-basis/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/19/source-nav/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/26/sublime-text/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/18/travis-ci-auto-build/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/28/use-chrome-ext-get-video-address/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/05/06/weekly-2017-05-06/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/05/13/weekly-2017-05-13/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/05/27/weekly-2017-05-27/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/06/12/weekly-2017-06-12/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/06/19/weekly-2017-06-19/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/06/26/weekly-2017-06-26/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/07/03/weekly-2017-07-03/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/07/10/weekly-2017-07-10/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/07/17/weekly-2017-07-17/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/07/25/weekly-2017-07-25/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/08/02/weekly-2017-08-02/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/08/13/weekly-2017-08-13/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/08/19/weekly-2017-08-20/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/17/weekly-2017-09-17/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/09/30/weekly-2017-09-30/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/10/09/weekly-2017-10-08/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://cosmeapp.github.io/2017/06/12/weekly-awesome/</loc>
+        <lastmod>2018-04-06T03:56:29.082Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+</urlset>
+<!-- XML Sitemap generated by Hexo SEO Friendly Sitemap Generator -->

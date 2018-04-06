@@ -1,0 +1,314 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css"><meta name="keywords" content="Andriod,翻译,"><link rel="alternate" href="/rss2.xml" title="美妆心得技术博客" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2"><meta name="description" content="原文来源: https://android.jlelse.eu/fast-scrolling-with-recyclerview-2b89d4574688这次翻译一篇来自于medium的文章，内容与recyclerView有关。众所周知,RecyclerView对ListView有很大的优势, Recyclerview也逐步代替ListView来实现列表的效果。我十分想念一个功能——快速滚动，你可"><meta name="keywords" content="Andriod,翻译"><meta property="og:type" content="article"><meta property="og:title" content="Fast Scrolling with RecyclerView翻译"><meta property="og:url" content="https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/index.html"><meta property="og:site_name" content="美妆心得技术博客"><meta property="og:description" content="原文来源: https://android.jlelse.eu/fast-scrolling-with-recyclerview-2b89d4574688这次翻译一篇来自于medium的文章，内容与recyclerView有关。众所周知,RecyclerView对ListView有很大的优势, Recyclerview也逐步代替ListView来实现列表的效果。我十分想念一个功能——快速滚动，你可"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*HliXJE2zpLAXWmXusOFSSA.gif"><meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*fnt26zTwl3zkAIazlNGvZw.gif"><meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*WwKn8Y9KQ-1EFAN324xwuw.gif"><meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*RN2W9mpIMaFkAqs2KI5pyw.gif"><meta property="og:image" content="https://cdn-images-1.medium.com/max/1600/1*cK8-ghSt_uRfRvMlJNd9cw.gif"><meta property="og:updated_time" content="2018-04-06T03:56:29.082Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Fast Scrolling with RecyclerView翻译"><meta name="twitter:description" content="原文来源: https://android.jlelse.eu/fast-scrolling-with-recyclerview-2b89d4574688这次翻译一篇来自于medium的文章，内容与recyclerView有关。众所周知,RecyclerView对ListView有很大的优势, Recyclerview也逐步代替ListView来实现列表的效果。我十分想念一个功能——快速滚动，你可"><meta name="twitter:image" content="https://cdn-images-1.medium.com/max/1600/1*HliXJE2zpLAXWmXusOFSSA.gif"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"5.1.2",sidebar:{position:"left",display:"post",offset:12,offset_float:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/"><title>Fast Scrolling with RecyclerView翻译 | 美妆心得技术博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f796c37823a686f5d3cf3ad6c280aa2d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">美妆心得技术博客</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="美妆心得技术部"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="美妆心得技术博客"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">Fast Scrolling with RecyclerView翻译</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-27T09:10:58+08:00">2017-09-27 </time></span><span class="post-count">字数: 999</span></div></header><div class="post-body" itemprop="articleBody"><blockquote><p>原文来源: <a href="https://android.jlelse.eu/fast-scrolling-with-recyclerview-2b89d4574688" target="_blank" rel="noopener">https://android.jlelse.eu/fast-scrolling-with-recyclerview-2b89d4574688</a></p></blockquote><p>这次翻译一篇来自于medium的文章，内容与recyclerView有关。</p><p>众所周知,RecyclerView对ListView有很大的优势, Recyclerview也逐步代替ListView来实现列表的效果。我十分想念一个功能——快速滚动，你可以拖动一个绘制的滑块并在列表中滚动。<br>在ListView中你可以这是做:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listView = (ListView) findViewById(R.id.listView);</span><br><span class="line">listView.setFastScrollEnabled(true);</span><br></pre></td></tr></table></figure><p>但是在RecyclerView中，没有一种简单的方式来拖动滑块实现下面的效果:</p><p><img src="https://cdn-images-1.medium.com/max/1600/1*HliXJE2zpLAXWmXusOFSSA.gif" alt="dada"></p><p>所以我们会引用第三方库比如<a href="https://github.com/FutureMind/recycler-fast-scroll" target="_blank" rel="noopener">Recycler Bubble</a>或者<a href="https://github.com/timusus/RecyclerView-FastScroll" target="_blank" rel="noopener">RecyclerView-FastScroll</a>。</p><p>随着Support Library 26的到来，我们能够轻松地实现RecyclerView快速滚动。Let’s get to it!</p><p><img src="https://cdn-images-1.medium.com/max/1600/1*fnt26zTwl3zkAIazlNGvZw.gif" alt=""></p><p>首先我们项目得引用Support Library 26,项目中的build.gradle如下所示:<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    ....</span><br><span class="line">    compile &apos;com.android.support:design:26.0.1&apos;</span><br><span class="line">    compile &apos;com.android.support:recyclerview-v7:26.0.1&apos;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p><p>由于Support Library 26现已转移到Google的maven存储库，需要在我们项目级的build.gradle文件中添加<strong>google()</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">buildscript &#123;</span><br><span class="line"></span><br><span class="line">    repositories &#123;</span><br><span class="line">        google()</span><br><span class="line">    &#125;</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>这是我们界面的布局代码,如下:</p><h4 id="content-main-xml"><a href="#content-main-xml" class="headerlink" title="content_main.xml"></a>content_main.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;android.support.constraint.ConstraintLayout</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;</span><br><span class="line">    tools:context=&quot;com.shaishavgandhi.fastscrolling.MainActivity&quot;</span><br><span class="line">    tools:showIn=&quot;@layout/activity_main&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &lt;android.support.v7.widget.RecyclerView</span><br><span class="line">    android:id=&quot;@+id/recyclerView&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line"> &lt;/android.support.v7.widget.RecyclerView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure><p>我构建了一个recyclerView，其由美国各州以及其代码的mock数据填充，如下展示：</p><p><img src="https://cdn-images-1.medium.com/max/1600/1*WwKn8Y9KQ-1EFAN324xwuw.gif" alt=""></p><p>现在让我们开始实现快速滚动,更新后的布局文件如下展示:<br></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;android.support.constraint.ConstraintLayout</span><br><span class="line">    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    xmlns:app=&quot;http://schemas.android.com/apk/res-auto&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    app:layout_behavior=&quot;@string/appbar_scrolling_view_behavior&quot;</span><br><span class="line">    tools:context=&quot;com.shaishavgandhi.fastscrolling.MainActivity&quot;</span><br><span class="line">    tools:showIn=&quot;@layout/activity_main&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &lt;android.support.v7.widget.RecyclerView</span><br><span class="line">    android:id=&quot;@+id/recyclerView&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    app:fastScrollEnabled=&quot;true&quot;</span><br><span class="line">    app:fastScrollHorizontalThumbDrawable=&quot;@drawable/thumb_drawable&quot;</span><br><span class="line">    app:fastScrollHorizontalTrackDrawable=&quot;@drawable/line_drawable&quot;</span><br><span class="line">    app:fastScrollVerticalThumbDrawable=&quot;@drawable/thumb_drawable&quot;</span><br><span class="line">    app:fastScrollVerticalTrackDrawable=&quot;@drawable/line_drawable&quot;&gt;</span><br><span class="line"></span><br><span class="line"> &lt;/android.support.v7.widget.RecyclerView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/android.support.constraint.ConstraintLayout&gt;</span><br></pre></td></tr></table></figure><p></p><p>让我们浏览一下下面的属性：</p><ul><li><strong>fastScrollEnabled</strong> boolean类型来启动快速滚动，如果设置为true值的话将要求我们提供一下四个属性</li><li><strong>fastScrollHorizontalThumbDrawable</strong> StateListDrawable类型将被用来绘制可以在横轴可滑动的的滑块</li><li><strong>fastScrollHorizontalTrackDrawable</strong> StateListDrawable类型将被用来绘制一条表示在横轴上的scrollbar的线条（轨道 译者注0）</li><li><strong>fastScrollVerticalThumbDrawable</strong> StateListDrawable类型将被用来绘制可以在纵轴可滑动的的滑块</li><li><strong>fastScrollVerticalTrackDrawable</strong> StateListDrawable类型将被用来绘制一条表示在纵轴上的scrollbar的线条</li></ul><p><strong>后四个的属性的值需要是StateListDrawable 否则会报错</strong>（译者注）</p><p>让我们来看一下StateListDrawables ，我使用原生形状，以便<br>可以轻松地重复使用它们。</p><h4 id="line-drawable-xml"><a href="#line-drawable-xml" class="headerlink" title="line_drawable.xml"></a>line_drawable.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:state_pressed=&quot;true&quot;</span><br><span class="line">        android:drawable=&quot;@drawable/line&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@drawable/line&quot;/&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure><h4 id="line-xml"><a href="#line-xml" class="headerlink" title="line.xml"></a>line.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">       android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;solid android:color=&quot;@android:color/darker_gray&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;padding</span><br><span class="line">        android:top=&quot;10dp&quot;</span><br><span class="line">        android:left=&quot;10dp&quot;</span><br><span class="line">        android:right=&quot;10dp&quot;</span><br><span class="line">        android:bottom=&quot;10dp&quot;/&gt;</span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure><h4 id="thumb-drawable-xml"><a href="#thumb-drawable-xml" class="headerlink" title="thumb_drawable.xml"></a>thumb_drawable.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;&gt;</span><br><span class="line">    &lt;item</span><br><span class="line">        android:state_pressed=&quot;true&quot;</span><br><span class="line">        android:drawable=&quot;@drawable/thumb&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;item</span><br><span class="line">        android:drawable=&quot;@drawable/thumb&quot;/&gt;</span><br><span class="line">&lt;/selector&gt;</span><br></pre></td></tr></table></figure><h4 id="thumb-xml"><a href="#thumb-xml" class="headerlink" title="thumb.xml"></a>thumb.xml</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">       android:shape=&quot;rectangle&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;corners</span><br><span class="line">        android:topLeftRadius=&quot;44dp&quot;</span><br><span class="line">        android:topRightRadius=&quot;44dp&quot;</span><br><span class="line">        android:bottomLeftRadius=&quot;44dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;padding</span><br><span class="line">        android:paddingLeft=&quot;22dp&quot;</span><br><span class="line">        android:paddingRight=&quot;22dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">    &lt;solid android:color=&quot;@color/colorPrimaryDark&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;/shape&gt;</span><br></pre></td></tr></table></figure><p>效果如下所示：</p><p><img src="https://cdn-images-1.medium.com/max/1600/1*RN2W9mpIMaFkAqs2KI5pyw.gif" alt="image"></p><p>太棒了！<br><img src="https://cdn-images-1.medium.com/max/1600/1*cK8-ghSt_uRfRvMlJNd9cw.gif" alt="image"></p><p>这是启用快速滚动的基本示例。看到我们如何自定义它以显示信件的首字母，如联系人应用程序。</p><p><a href="https://github.com/shaishavgandhi05/FastScrolling" target="_blank" rel="noopener">Demo</a></p><p>最后，happy coding。</p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong> 刘赛登</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/" title="Fast Scrolling with RecyclerView翻译">https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/Andriod/" rel="tag"># Andriod</a> <a href="/tags/翻译/" rel="tag"># 翻译</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/09/26/install-charles-certificate-android/" rel="next" title="在安卓手机上安装Charles证书"><i class="fa fa-chevron-left"></i> 在安卓手机上安装Charles证书</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2017/09/30/weekly-2017-09-30/" rel="prev" title="美妆心得技术周刊2017-09-30">美妆心得技术周刊2017-09-30 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">美妆心得技术部</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">34</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">19</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#content-main-xml"><span class="nav-number">1.</span> <span class="nav-text">content_main.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#line-drawable-xml"><span class="nav-number">2.</span> <span class="nav-text">line_drawable.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#line-xml"><span class="nav-number">3.</span> <span class="nav-text">line.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thumb-drawable-xml"><span class="nav-number">4.</span> <span class="nav-text">thumb_drawable.xml</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#thumb-xml"><span class="nav-number">5.</span> <span class="nav-text">thumb.xml</span></a></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">美妆心得技术部</span></div><div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><link rel="stylesheet" href="/gitalk/gitalk.css"><script src="/gitalk/gitalk.min.js"></script><script>var gitalk=new Gitalk({clientID:"cb9d990636e84547cadb",clientSecret:"78036da2ca2985c3df477c76c407a120ae664368",repo:"cosmeapp.github.com",owner:"cosmeapp",id:"",title:"Fast Scrolling with RecyclerView翻译",body:"https://cosmeapp.github.io/2017/09/27/fast-scrolling-with-recyclerview/\n\nFast Scrolling with RecyclerView翻译",labels:["Gitalk","Andriod","翻译"],admin:["huixisheng"],distractionFreeMode:!0});gitalk.render("gitalk-container")</script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script></body></html>

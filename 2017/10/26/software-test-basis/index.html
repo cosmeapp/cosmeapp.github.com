@@ -1,0 +1,314 @@
+<!DOCTYPE html><html class="theme-next pisces use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"><link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css"><link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css"><link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css"><meta name="keywords" content="测试,"><link rel="alternate" href="/rss2.xml" title="美妆心得技术博客" type="application/atom+xml"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2"><meta name="description" content="app测试做了一年，既然要写博客，开篇就来整理一下软件测试的基础知识，回顾巩固一下。本篇博客有借鉴也有自己的想法，希望可以多交流交流什么是软件测试对我来说，最好记，最合理的解释是：软件测试是一种实际输出与预期输出之间的审核或者比较过程，使用人工操作或软件自动运行的方式（百度百科的定义）。为什么这么说呢，因为bug描述有4要素：前提条件，操作步骤，预期结果，当前结果，也对应了测试用例中的要素点，举个"><meta name="keywords" content="测试"><meta property="og:type" content="article"><meta property="og:title" content="软件测试基础整理"><meta property="og:url" content="https://cosmeapp.github.io/2017/10/26/software-test-basis/index.html"><meta property="og:site_name" content="美妆心得技术博客"><meta property="og:description" content="app测试做了一年，既然要写博客，开篇就来整理一下软件测试的基础知识，回顾巩固一下。本篇博客有借鉴也有自己的想法，希望可以多交流交流什么是软件测试对我来说，最好记，最合理的解释是：软件测试是一种实际输出与预期输出之间的审核或者比较过程，使用人工操作或软件自动运行的方式（百度百科的定义）。为什么这么说呢，因为bug描述有4要素：前提条件，操作步骤，预期结果，当前结果，也对应了测试用例中的要素点，举个"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/tracup.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/1.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/23.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/7.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/%E7%99%BB%E5%BD%95.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/%E5%A1%AB%E5%86%99%E8%A7%84%E5%88%99.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/%E8%81%94%E7%B3%BB.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/%E4%BB%A3%E8%A1%A8%E6%95%B0%E6%8D%AE.jpeg"><meta property="og:image" content="https://cosmeapp.github.io/images/test_pic/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B.jpeg"><meta property="og:updated_time" content="2018-04-06T03:56:29.082Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="软件测试基础整理"><meta name="twitter:description" content="app测试做了一年，既然要写博客，开篇就来整理一下软件测试的基础知识，回顾巩固一下。本篇博客有借鉴也有自己的想法，希望可以多交流交流什么是软件测试对我来说，最好记，最合理的解释是：软件测试是一种实际输出与预期输出之间的审核或者比较过程，使用人工操作或软件自动运行的方式（百度百科的定义）。为什么这么说呢，因为bug描述有4要素：前提条件，操作步骤，预期结果，当前结果，也对应了测试用例中的要素点，举个"><meta name="twitter:image" content="https://cosmeapp.github.io/images/test_pic/tracup.jpeg"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Pisces",version:"5.1.2",sidebar:{position:"left",display:"post",offset:12,offset_float:12,b2t:!1,scrollpercent:!0,onmobile:!1},fancybox:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn"}},duoshuo:{userId:"0",author:"博主"},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:10},labels:{input_placeholder:"Search for Posts",hits_empty:"We didn't find any results for the search: ${query}",hits_stats:"${hits} results found in ${time} ms"}}}</script><link rel="canonical" href="https://cosmeapp.github.io/2017/10/26/software-test-basis/"><title>软件测试基础整理 | 美妆心得技术博客</title><script type="text/javascript">var _hmt=_hmt||[];!function(){var e=document.createElement("script");e.src="https://hm.baidu.com/hm.js?f796c37823a686f5d3cf3ad6c280aa2d";var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t)}()</script></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container sidebar-position-left page-post-detail"><div class="headband"></div><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-brand-wrapper"><div class="site-meta"><div class="custom-logo-site-title"><a href="/" class="brand" rel="start"><span class="logo-line-before"><i></i></span> <span class="site-title">美妆心得技术博客</span> <span class="logo-line-after"><i></i></span></a></div><h1 class="site-subtitle" itemprop="description"></h1></div><div class="site-nav-toggle"><button><span class="btn-bar"></span> <span class="btn-bar"></span> <span class="btn-bar"></span></button></div></div><nav class="site-nav"><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i><br>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i><br>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i><br>归档</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i><br>搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i> </span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"><input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="https://cosmeapp.github.io/2017/10/26/software-test-basis/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="美妆心得技术部"><meta itemprop="description" content=""><meta itemprop="image" content="/images/avatar.gif"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="美妆心得技术博客"></span><header class="post-header"><h2 class="post-title" itemprop="name headline">软件测试基础整理</h2><div class="post-meta"><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-calendar-o"></i> </span><span class="post-meta-item-text">发表于</span> <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-27T00:00:00+08:00">2017-10-27 </time></span><span class="post-count">字数: 2,691</span></div></header><div class="post-body" itemprop="articleBody"><p>app测试做了一年，既然要写博客，开篇就来整理一下软件测试的基础知识，回顾巩固一下。本篇博客有借鉴也有自己的想法，希望可以多交流交流</p><h2 id="什么是软件测试"><a href="#什么是软件测试" class="headerlink" title="什么是软件测试"></a>什么是软件测试</h2><p>对我来说，最好记，最合理的解释是：<code>软件测试是一种实际输出与预期输出之间的审核或者比较过程，使用人工操作或软件自动运行的方式</code>（百度百科的定义）。为什么这么说呢，因为<code>bug描述有4要素：前提条件，操作步骤，预期结果，当前结果</code>，也对应了测试用例中的要素点，举个例子，这样描述bug显得条理清楚，有木有？</p><blockquote><p>bug描述：<br>前提：删除的评论在热门评论中<br>操作：所有评论页面，点击‘删除’按钮<br>预期结果：热门评论和最新评论中的评论都被删除<br>当前结果：仅最新评论中的被删除</p></blockquote><h2 id="软件测试的目的"><a href="#软件测试的目的" class="headerlink" title="软件测试的目的"></a>软件测试的目的</h2><p>就我的理解，软件测试的目的是：1.测试开发的功能是否符合需求，因为需求文档就是你测试的标准，不符合的就是bug；2.确认软件的质量<br>常规解释：测试的目的是为了发现尽可能多的bug，成功的测试在于发现了迄今尚未发现的bug，保证软件的质量；<br>功能测试完成后，以用户的身份来运行app，看功能是否符合使用规范，使用起来是否方便，用户使用app无非就是图个实用或者interesting，可以将自己的使用心得告诉产品经理，作为参考。</p><h2 id="软件测试的过程"><a href="#软件测试的过程" class="headerlink" title="软件测试的过程"></a>软件测试的过程</h2><p>总结起来，也是4个步骤：需求评审–设计用例–用例测试–bug提交及验证</p><ul><li>需求评审：因为我不需要参加需求讨论，所以这一步对我来说就是“啃”需求文档，需求了解的越深，测试时考虑的会更多更全面；不同公司会有不同的规定，但殊途同归，这一步的目的都是读懂需求，知道你的测试标准；</li><li>设计用例：根据需求分析，利用等价类划分法等方法设计用例，尽可能的覆盖可能发生的情况；</li><li>用例测试：根据测试用例测试已开发的功能；</li><li>bug提交及验证：上边已经说了，bug描述有4个要素点:前提条件，操作步骤，预期结果，当前结果，提交的bug让开发能看懂就算是成功了；验证bug后记得修改bug状态，修改好了就关闭，仍有bug就重新打开并修改bug描述。</li></ul><h2 id="测试用例二三事！"><a href="#测试用例二三事！" class="headerlink" title="测试用例二三事！"></a>测试用例二三事！</h2><h3 id="1-bug管理工具"><a href="#1-bug管理工具" class="headerlink" title="1.bug管理工具"></a>1.bug管理工具</h3><p>刚开始使用的平台是我们后台自主开发的QC平台，因为要升级，目前使用的是蒲公英的tracup平台<br>界面如下：</p><p><img src="/images/test_pic/tracup.jpeg" alt="tracup"><br>要素点已在上图标注,不管是什么平台，要素点都是一样的：项目名称、问题类型（一般为bug）、主题、bug描述、优先级、版本号、指派人</p><h3 id="2-测试用例编写规范"><a href="#2-测试用例编写规范" class="headerlink" title="2.测试用例编写规范"></a>2.测试用例编写规范</h3><p>刚开始编写测试用例时，只有一个模板，怎么写只能靠自己摸索，推荐几篇短小但是切合实际工作的<br><a href="http://blog.csdn.net/xiaofuruo/article/details/41750161" target="_blank" rel="noopener">手机app测试记录一</a><br><a href="http://www.jianshu.com/p/86f2f22cbe99?utm_campaign=hugo&amp;utm_medium=reader_share&amp;utm_content=note&amp;utm_source=weixin-friends" target="_blank" rel="noopener">输入框常见bug</a><br><a href="http://www.cnblogs.com/m317/p/6274093.html" target="_blank" rel="noopener">测试用例规范</a></p><p>以下是摘抄的与我的测试过程相关的</p><ol><li>初始化测试用例<br>进入功能模块（页面）后，某些空间会初始化填入数据，生成一个用例确保所有的初始数据正确。</li></ol><p><img src="/images/test_pic/1.jpeg" alt="1"></p><ol start="2"><li>边界的测试用例<br>每个数据项，生成一个边界用例（含最大／最小两个边界值）<br>字符串数据以字符串长度为计量单位<br>布尔值数据的所有取值都需测试<br>多个复选框一组时，需测同时被选中及都不被选中<br>下拉菜单、列表框、单选按钮组为最大、最小的2个取值</li><li>空值的测试用例<br>对于每个必填数据项，（不提供空值的除外）都生成一个用例，则预期结果提示该数据项为空。</li></ol><p><img src="/images/test_pic/23.jpeg" alt="23"></p><ol start="4"><li>格式错误的测试用例<br>对于输入框数据项，都生成一个用例，预期结果提示该数据项格式错误<br>日期／数字／字符串输入框<br>Email、邮编、用户名等带格式要求</li><li>溢出的测试用例<br>对于输入框数据项，都生成一个取值范围外的测试用例，预期结果提示该数据项超出范围<br>日期输入框：需添加上边界日期小于下边界日期的用例<br>数字输入框：如‘金额’一般为正整数，填入一个负数<br>字符串输入框：超出规定长度的字符串</li><li>关联的测试用例<br>对于相互关联的两个或多个数据项，生成一个用例，确保当一个数据项改变时，其它数据项的变化正确。</li><li>唯一值的测试用例<br>某些业务的数据字段要求是唯一的，生成一个或两个用例（新建，编辑），使得输入数据与原有数据在该字段重复，预期结果为返回该数据已存在的提示</li></ol><p><img src="/images/test_pic/7.jpeg" alt="7"></p><ol start="8"><li>权限不足的测试用例<br>对于功能模块，生成一个用例，以没有权限的用户身份访问，预期结果为提示权限不足</li><li>角色全新的测试用例<br>业务功能流程涉及一到多个角色，对于每个角色，都生成一个用例，预期结果为用户以这个角色登录时，他仅能执行权限允许的操作。</li></ol><h3 id="测试用例设计方法"><a href="#测试用例设计方法" class="headerlink" title="测试用例设计方法"></a>测试用例设计方法</h3><p>黑盒测试常用设计方法：等价类划分法、边界值分析法、错误猜测法、因果图法</p><h4 id="等价类划分法"><a href="#等价类划分法" class="headerlink" title="等价类划分法"></a>等价类划分法</h4><blockquote><p>等价类划分法是把所有可能输入的数据，即程序的输入域划分为若干部分（子集），然后从每个子集中选取少数具有代表性的数据作为测试用例</p><ul><li>等价类分为：有效等价类和无效等价类</li><li>有效等价类：指对程序的规格说明来说是合理的、有意义的输入数据的集合</li><li>无效等价类：指对程序的规格说明来说是不合理的或无意义的输入数据的集合。无效等价类可能有1个或多个</li></ul></blockquote><p>转化为测试用例：<br>在确立了等价类后，可建立等价类表，列出所有划分出的等价类输入条件：有效等价类、无效等价类，然后从划分出的等价类中按一下三个原则设计测试用例：</p><ol><li>为每个等价类规定一个唯一编号；</li><li>设计一个新的测试用例，使其<code>尽可能多地覆盖</code>尚未被覆盖的有效等价类，重复这一步，直到所有的有效等价类都被覆盖为止；</li><li>设计一个新的测试用例，使其<code>仅覆盖一个</code>尚未被覆盖的无效等价类，重复这一步，直到所有的无效等价类都被覆盖为止。</li></ol><p>例如：输入密码的测试用例<br>在我们的app中，密码个数规定要输入6-16位，则可以列出一个不等式：6&lt;=x&lt;=16<br>有效等价类为：[6，16]<br>无效等价类为：[0，6），（16，无穷）<br>等价类判断出来后就是选择代表性的数据来写测试用例，通常代表性的数据与边界值有关，选取正好等于，刚刚大于或刚刚小于边界的值作为测试数据。<br>最后选择的数据为：0，5，6，17<br>则测试用例为：密码为0/5/6/17位数的测试</p><h4 id="边界值分析法"><a href="#边界值分析法" class="headerlink" title="边界值分析法"></a>边界值分析法</h4><blockquote><p>边界值分析法就是<code>对输入或输出边界值进行测试</code>的一种黑盒测试方法。该方法通常作为等价类划分法的补充，这种情况下，其测试用例来自等价类的边界</p></blockquote><p>学习边界值的时候顺便了解一下<a href="http://yzylion.blog.163.com/blog/static/89406994200892784325898/" target="_blank" rel="noopener">什么是上点，内点，离点</a></p><h4 id="因果图法"><a href="#因果图法" class="headerlink" title="因果图法"></a>因果图法</h4><blockquote><p>因果图法适合<code>输入域较多而输入域之间又存在互相影响的关系</code>。<br>因果图法就是找出输入因子以及其间的影响关系，确定每组输入因子所应输出的结果，画出<code>因果图</code>，转换成<code>判定表</code>，然后生成测试用例的一个测试方法</p></blockquote><p>因果关系：恒等、与或非逻辑关系，<br>因之间的约束关系：逻辑异、逻辑或、唯一关系、限制关系、要求关系，具体可以参考这篇文章：<a href="http://blog.sina.com.cn/s/blog_560ddb8501000a9c.html" target="_blank" rel="noopener">实例介绍因果图法</a></p><h4 id="错误推测法"><a href="#错误推测法" class="headerlink" title="错误推测法"></a>错误推测法</h4><blockquote><p>错误推测法是<code>基于经验和直觉</code>推测程序中所有可能存在的各种错误，从而有针对性的设计测试用例的方法</p></blockquote><p>所以使用错误推测法的前提就是经验的积累！</p><h4 id="测试方法实例"><a href="#测试方法实例" class="headerlink" title="测试方法实例"></a>测试方法实例</h4><p>一个功能的测试用例大多会涉及多个方法，例如：我们app的密码登录</p><p><img src="/images/test_pic/%E7%99%BB%E5%BD%95.jpeg" alt="登录"></p><p>首先要了解登录相关需求，在这只显示一下填写规则，从规则中总结输入条件<br><img src="/images/test_pic/%E5%A1%AB%E5%86%99%E8%A7%84%E5%88%99.jpeg" alt="填写规则"></p><p>输入不同的手机号和密码，点击登录，会有不同的toast显示，所以结果有很多，先确定一下手机号和密码的关系：手机号格式正确后才会对密码做判断，所以联系如下图：<br><img src="/images/test_pic/%E8%81%94%E7%B3%BB.jpeg" alt="联系"></p><p>大关系确定后就要扣小细节了，根据边界值法和等价类分界法，手机号和密码分别设计测试用例可以分为以下几种情况：</p><p><img src="/images/test_pic/%E4%BB%A3%E8%A1%A8%E6%95%B0%E6%8D%AE.jpeg" alt="代表数据"></p><p>接下来就是设计用例的总结，根据手机号密码联系图，<br>第一列可设计1个测试用例，<br>第三列仅看手机号就可以，0个手机号可归到第一个测试用例，所以这一列可以设置3个测试用例<br>第四列就有点复杂了，不过因为判断密码的前提是手机号有效，所以范围又缩小了，这一块可以做个判定表，然后删除冗余的，这个也不难，所以我就不做了，最后的测试用例如下：</p><p><img src="/images/test_pic/%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B.jpeg" alt="测试用例"></p><p>基础知识就回顾到这，希望大家可以多多交流，如果有说的不对的地方，尽情回复！</p></div><div><ul class="post-copyright"><li class="post-copyright-author"><strong>本文作者：</strong> family</li><li class="post-copyright-link"><strong>本文链接：</strong> <a href="https://cosmeapp.github.io/2017/10/26/software-test-basis/" title="软件测试基础整理">https://cosmeapp.github.io/2017/10/26/software-test-basis/</a></li><li class="post-copyright-license"><strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！</li></ul></div><footer class="post-footer"><div class="post-tags"><a href="/tags/测试/" rel="tag"># 测试</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2017/10/09/weekly-2017-10-08/" rel="next" title="美妆心得技术周刊2017-10-09"><i class="fa fa-chevron-left"></i> 美妆心得技术周刊2017-10-09</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"><a href="/2017/10/28/use-chrome-ext-get-video-address/" rel="prev" title="撸一个插件来解析视频地址">撸一个插件来解析视频地址 <i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"></div></div></div><div class="comments" id="comments"></div><div id="gitalk-container"></div></div><div class="sidebar-toggle"><div class="sidebar-toggle-line-wrap"><span class="sidebar-toggle-line sidebar-toggle-line-first"></span> <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span> <span class="sidebar-toggle-line sidebar-toggle-line-last"></span></div></div><aside id="sidebar" class="sidebar"><div class="sidebar-inner"><ul class="sidebar-nav motion-element"><li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">文章目录</li><li class="sidebar-nav-overview" data-target="site-overview">站点概览</li></ul><section class="site-overview sidebar-panel"><div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person"><p class="site-author-name" itemprop="name">美妆心得技术部</p><p class="site-description motion-element" itemprop="description"></p></div><nav class="site-state motion-element"><div class="site-state-item site-state-posts"><a href="/archives/"><span class="site-state-item-count">34</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-tags"><a href="/tags/index.html"><span class="site-state-item-count">19</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="feed-link motion-element"><a href="/rss2.xml" rel="alternate"><i class="fa fa-rss"></i> RSS</a></div><div class="links-of-author motion-element"></div></section><section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active"><div class="post-toc"><div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是软件测试"><span class="nav-number">1.</span> <span class="nav-text">什么是软件测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件测试的目的"><span class="nav-number">2.</span> <span class="nav-text">软件测试的目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件测试的过程"><span class="nav-number">3.</span> <span class="nav-text">软件测试的过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#测试用例二三事！"><span class="nav-number">4.</span> <span class="nav-text">测试用例二三事！</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-bug管理工具"><span class="nav-number">4.1.</span> <span class="nav-text">1.bug管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-测试用例编写规范"><span class="nav-number">4.2.</span> <span class="nav-text">2.测试用例编写规范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#测试用例设计方法"><span class="nav-number">4.3.</span> <span class="nav-text">测试用例设计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#等价类划分法"><span class="nav-number">4.3.1.</span> <span class="nav-text">等价类划分法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边界值分析法"><span class="nav-number">4.3.2.</span> <span class="nav-text">边界值分析法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#因果图法"><span class="nav-number">4.3.3.</span> <span class="nav-text">因果图法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误推测法"><span class="nav-number">4.3.4.</span> <span class="nav-text">错误推测法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#测试方法实例"><span class="nav-number">4.3.5.</span> <span class="nav-text">测试方法实例</span></a></li></ol></li></ol></li></ol></div></div></section></div></aside></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span> <span class="with-love"><i class="fa fa-heart"></i> </span><span class="author" itemprop="copyrightHolder">美妆心得技术部</span></div><div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div><span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.2</div></div></footer><div class="back-to-top"><i class="fa fa-arrow-up"></i> <span id="scrollpercent"><span>0</span>%</span></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script><script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script><script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script><script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script><script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script><script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script><link rel="stylesheet" href="/gitalk/gitalk.css"><script src="/gitalk/gitalk.min.js"></script><script>var gitalk=new Gitalk({clientID:"cb9d990636e84547cadb",clientSecret:"78036da2ca2985c3df477c76c407a120ae664368",repo:"cosmeapp.github.com",owner:"cosmeapp",id:"",title:"软件测试基础整理",body:"https://cosmeapp.github.io/2017/10/26/software-test-basis/\n\n软件测试基础整理",labels:["Gitalk","测试"],admin:["huixisheng"],distractionFreeMode:!0});gitalk.render("gitalk-container")</script><script type="text/javascript">// Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });</script></body></html>
